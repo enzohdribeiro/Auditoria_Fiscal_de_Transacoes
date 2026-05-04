@@ -20,20 +20,21 @@ e atualizar o estado do documento no fluxo de auditoria (pendente,auditado ou re
 *   **Encapsulamento de Estado:** Gerenciamento do ciclo de vida do documento através de um `Enum` (`StatusFiscal`).
 
 ## Arquitetura
-`
+```text
 src/
  ┣ controller/
- ┃ ┗ Impressora.java          # Saída de dados com verificação de tipo
+ ┃ ┗ Impressora.java          # Responsável pelo output seguro dos dados
  ┣ model/
- ┃ ┣ Tributavel.java          # Interface (O Contrato)
- ┃ ┣ DocumentoFiscal.java     # Classe Abstrata (O Molde)
- ┃ ┣ StatusFiscal.java        # Enum (Os Estados)
- ┃ ┣ NotaFiscalServico.java   # Classe Concreta (Especialização)
- ┃ ┗ FaturaExportacao.java    # Classe Concreta (Especialização)
+ ┃ ┣ Tributavel.java          # (Interface) Contrato principal
+ ┃ ┣ DocumentoFiscal.java     # (Classe Abstrata) Molde de estado
+ ┃ ┣ StatusFiscal.java        # (Enum) Ciclo de vida
+ ┃ ┣ NotaFiscalServico.java   # (Classe Concreta) Regra de ISS
+ ┃ ┗ FaturaExportacao.java    # (Classe Concreta) Regra de Alfândega
  ┣ service/
- ┃ ┗ ProcessadorFiscal.java   # Motor de Regras e Casting
+ ┃ ┗ ProcessadorFiscal.java   # Core da lógica de auditoria e Casting
  ┗ main/
-   ┗ Main.java                # Setup e execução do cenário `
+   ┗ Main.java                # Ponto de entrada e setup do cenário
+```
    
 ## Exemplo de funcionamento:
 ```
